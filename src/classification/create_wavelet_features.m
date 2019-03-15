@@ -28,9 +28,9 @@ function [X,Y] = create_wavelet_features( R,varargin )
     
     % check if we want to log-transform the wavelet variances
     if nargin > 1 && ~isempty( varargin{1} )
-        useLog = varargin{1};
+        sqrtTransform = varargin{1};
     else
-        useLog = false;
+        sqrtTransform = false;
     end
     
     if nargin > 2 && ~isempty( varargin{2} )
@@ -60,7 +60,7 @@ function [X,Y] = create_wavelet_features( R,varargin )
     count = 0;
     
     for i = 1:nAnimals
-        if useLog
+        if sqrtTransform
             w = squeeze( sqrt( var( R(i).data.W,[],2 ) ) );
         else
             w = squeeze( var( R(i).data.W,[],2 ) );
